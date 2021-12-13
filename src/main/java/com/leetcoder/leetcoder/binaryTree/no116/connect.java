@@ -10,10 +10,18 @@ public class connect {
         if (root == null) {
             return null;
         }
-        root.left.next = root.right;
-        connect(root.left);
-        connect(root.right);
+        helper(root.left, root.right);
         return root;
+    }
+
+    private void helper(Node node1, Node node2) {
+        if (node1 == null || node2 == null) {
+            return;
+        }
+        node1.next = node2;
+        helper(node1.left, node1.right);
+        helper(node2.left, node2.right);
+        helper(node1.right, node2.left);
     }
 
 
