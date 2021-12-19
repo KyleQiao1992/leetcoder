@@ -9,7 +9,7 @@ import lombok.Data;
  **/
 @Data
 public class TreeNode {
-    public Integer rootValue;
+    public Integer val;
     public TreeNode left;
     public TreeNode right;
 }
