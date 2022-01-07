@@ -1,6 +1,6 @@
-package com.leetcoder.leetcoder.binaryTree;
+package com.leetcoder.leetcoder.binaryTree.no297;
 
-import lombok.Data;
+import com.leetcoder.leetcoder.binaryTree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,23 +8,39 @@ import java.util.Queue;
 /**
  * @ Description :
  * @ wiki:
- * @ date: created in 6:58 下午 2021/12/13
+ * @ date: created in 4:47 下午 2022/1/6
  **/
-@Data
-public class TreeNode {
-    public Integer val;
-    public TreeNode left;
-    public TreeNode right;
-
-    public TreeNode(Integer val) {
-        this.val = val;
-    }
-
+public class Codec_Level_Solution {
     String SEP = ",";
     String NULL = "#";
 
+    /* 将二叉树序列化为字符串 */
+    String serialize(TreeNode root) {
+        if (root == null) return "";
+        StringBuilder sb = new StringBuilder();
+        // 初始化队列，将 root 加入队列
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            TreeNode cur = q.poll();
+
+            /* 层级遍历代码位置 */
+            if (cur == null) {
+                sb.append(NULL).append(SEP);
+                continue;
+            }
+            sb.append(cur.val).append(SEP);
+            /*****************/
+
+            q.offer(cur.left);
+            q.offer(cur.right);
+        }
+        return sb.toString();
+    }
+
     /* 将字符串反序列化为二叉树结构 */
-    public TreeNode treeBuilder(String data) {
+    public TreeNode deserialize(String data) {
         if (data.isEmpty()) return null;
         String[] nodes = data.split(SEP);
         // 第一个元素就是 root 的值
@@ -56,4 +72,5 @@ public class TreeNode {
         }
         return root;
     }
+
 }
