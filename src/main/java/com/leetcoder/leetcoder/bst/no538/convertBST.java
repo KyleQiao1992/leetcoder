@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.binaryTree.no538;
+package com.leetcoder.leetcoder.bst.no538;
 
 import com.leetcoder.leetcoder.binaryTree.TreeNode;
 

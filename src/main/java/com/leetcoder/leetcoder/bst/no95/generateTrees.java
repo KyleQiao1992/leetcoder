@@ -1,11 +1,9 @@
-package com.leetcoder.leetcoder.binaryTree.no95;
+package com.leetcoder.leetcoder.bst.no95;
 
 import com.leetcoder.leetcoder.binaryTree.TreeNode;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @ Description :
