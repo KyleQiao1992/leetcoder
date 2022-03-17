@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.dp.no302;
+package com.leetcoder.leetcoder.dp.no322;
 
 import java.util.Arrays;
 
