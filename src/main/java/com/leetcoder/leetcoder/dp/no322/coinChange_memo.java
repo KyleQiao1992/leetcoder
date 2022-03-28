@@ -1,6 +1,7 @@
 package com.leetcoder.leetcoder.dp.no322;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ Description :
@@ -8,11 +9,9 @@ import java.util.Arrays;
  * @ date: created in 3:19 下午 2022/2/11
  **/
 public class coinChange_memo {
-    int[] memo;
+    private Map<Integer, Integer> memoMap = new HashMap<>();
 
     public int coinChange(int[] coins, int amount) {
-        memo = new int[amount + 1];
-        Arrays.fill(memo, -2);
         return dp(coins, amount);
     }
 
@@ -23,10 +22,11 @@ public class coinChange_memo {
         if (amount < 0) {
             return -1;
         }
-        if (memo[amount] != -2) {
-            return memo[amount];
+        if (memoMap.containsKey(amount)) {
+            return memoMap.get(amount);
         }
-        int res = Integer.MAX_VALUE;
+
+        Integer res = Integer.MAX_VALUE;
         for (Integer coin : coins) {
             Integer subProblem = dp(coins, amount - coin);
             if (subProblem == -1) {
@@ -34,13 +34,8 @@ public class coinChange_memo {
             }
             res = Math.min(res, subProblem + 1);
         }
-        memo[amount] = res == Integer.MAX_VALUE ? -1 : res;
-        return memo[amount];
-    }
+        memoMap.put(amount, res == Integer.MAX_VALUE ? -1 : res);
 
-    public static void main(String[] args) {
-        coinChange_memo test = new coinChange_memo();
-        int[] coins = new int[]{1, 2, 5};
-        test.coinChange(coins, 11);
+        return memoMap.get(amount);
     }
 }
