@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.others.no13;
+package com.leetcoder.leetcoder.str.no13;
 
 import java.util.HashMap;
 import java.util.Map;

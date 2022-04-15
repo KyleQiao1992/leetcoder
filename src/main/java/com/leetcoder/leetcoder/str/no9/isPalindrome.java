@@ -1,7 +1,4 @@
-package com.leetcoder.leetcoder.others.no9;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.leetcoder.leetcoder.str.no9;
 
 /**
  * @ Description :

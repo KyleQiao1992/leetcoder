@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.search.binarySearch.no35;
+package com.leetcoder.leetcoder.others.no35;
 
 /**
  * @ Description :

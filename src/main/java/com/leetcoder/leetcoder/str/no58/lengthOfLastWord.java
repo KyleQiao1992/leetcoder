@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.others.no58;
+package com.leetcoder.leetcoder.str.no58;
 
 /**
  * @ Description :
