@@ -3,6 +3,7 @@ package com.leetcoder.leetcoder.bst.no1305;
 import com.leetcoder.leetcoder.binaryTree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,8 +13,21 @@ import java.util.List;
  **/
 public class Solution1 {
 
+    private List<Integer> res = new ArrayList<>();
+
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
-        List<Integer> res = new ArrayList<>();
+        traverse(root1);
+        traverse(root2);
+        Collections.sort(res);
         return res;
+    }
+
+    private void traverse(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        traverse(node.left);
+        res.add(node.val);
+        traverse(node.right);
     }
 }
