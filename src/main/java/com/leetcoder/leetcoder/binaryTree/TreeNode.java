@@ -2,6 +2,7 @@ package com.leetcoder.leetcoder.binaryTree;
 
 import lombok.Data;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,44 +17,51 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
 
-    public TreeNode(Integer val) {
-        this.val = val;
+    public TreeNode(Integer x) {
+        val = x;
     }
 
-    String SEP = ",";
-    String NULL = "#";
+    public static TreeNode constructTree(Integer[] nums) {
+        if (nums.length == 0) return new TreeNode(0);
+        Deque<TreeNode> nodeQueue = new LinkedList<>();
+        // 创建一个根节点
+        TreeNode root = new TreeNode(nums[0]);
+        nodeQueue.offer(root);
+        TreeNode cur;
+        // 记录当前行节点的数量（注意不一定是2的幂，而是上一行中非空节点的数量乘2）
+        int lineNodeNum = 2;
+        // 记录当前行中数字在数组中的开始位置
+        int startIndex = 1;
+        // 记录数组中剩余的元素的数量
+        int restLength = nums.length - 1;
 
-    /* 将字符串反序列化为二叉树结构 */
-    public TreeNode treeBuilder(String data) {
-        if (data.isEmpty()) return null;
-        String[] nodes = data.split(SEP);
-        // 第一个元素就是 root 的值
-        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
-
-        // 队列 q 记录父节点，将 root 加入队列
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-
-        for (int i = 1; i < nodes.length; ) {
-            // 队列中存的都是父节点
-            TreeNode parent = q.poll();
-            // 父节点对应的左侧子节点的值
-            String left = nodes[i++];
-            if (!left.equals(NULL)) {
-                parent.left = new TreeNode(Integer.parseInt(left));
-                q.offer(parent.left);
-            } else {
-                parent.left = null;
+        while (restLength > 0) {
+            // 只有最后一行可以不满，其余行必须是满的
+//            // 若输入的数组的数量是错误的，直接跳出程序
+//            if (restLength < lineNodeNum) {
+//                System.out.println("Wrong Input!");
+//                return new TreeNode(0);
+//            }
+            for (int i = startIndex; i < startIndex + lineNodeNum; i = i + 2) {
+                // 说明已经将nums中的数字用完，此时应停止遍历，并可以直接返回root
+                if (i == nums.length) return root;
+                cur = nodeQueue.poll();
+                if (nums[i] != null) {
+                    cur.left = new TreeNode(nums[i]);
+                    nodeQueue.offer(cur.left);
+                }
+                // 同上，说明已经将nums中的数字用完，此时应停止遍历，并可以直接返回root
+                if (i + 1 == nums.length) return root;
+                if (nums[i + 1] != null) {
+                    cur.right = new TreeNode(nums[i + 1]);
+                    nodeQueue.offer(cur.right);
+                }
             }
-            // 父节点对应的右侧子节点的值
-            String right = nodes[i++];
-            if (!right.equals(NULL)) {
-                parent.right = new TreeNode(Integer.parseInt(right));
-                q.offer(parent.right);
-            } else {
-                parent.right = null;
-            }
+            startIndex += lineNodeNum;
+            restLength -= lineNodeNum;
+            lineNodeNum = nodeQueue.size() * 2;
         }
+
         return root;
     }
 }
