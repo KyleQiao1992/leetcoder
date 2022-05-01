@@ -1,4 +1,4 @@
-package com.leetcoder.leetcoder.bst.no96;
+package com.leetcoder.leetcoder.binaryTree.no96;
 
 /**
  * @ Description :
